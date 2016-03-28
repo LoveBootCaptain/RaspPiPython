@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from Adafruit_8x8 import EightByEight
+from Modules.Adafruit_Python_Code.Adafruit_LEDMatrix.Adafruit_8x8 import EightByEight
 
 # ===========================================================================
 # 8x8 Pixel Example
