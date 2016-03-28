@@ -14,6 +14,7 @@ Put the Modules Folder to your `PYTHONPATH`
 put this lines at the end of `.bashrc`
 
 `PYTHONPATH="$PYTHONPATH:/home/pi/RaspPiPython/Modules"`
+
 `export PYTHONPATH`
 
 ## Run
