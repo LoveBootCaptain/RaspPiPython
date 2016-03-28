@@ -3,6 +3,8 @@ Some code examples for adafruit hardware. Build a robot with python and a ps3 co
 
 ## Install
 
+`cd`
+
 `git clone https://github.com/LoveBootCaptain/RaspPiPython.git`
 
 ## Setup
@@ -14,6 +16,7 @@ Put the Modules Folder to your `PYTHONPATH`
 put this lines at the end of `.bashrc`
 
 `PYTHONPATH="$PYTHONPATH:/home/pi/RaspPiPython/Modules"`
+
 `export PYTHONPATH`
 
 ## Run
