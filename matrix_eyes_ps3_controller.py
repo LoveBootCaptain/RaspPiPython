@@ -1,7 +1,7 @@
 import pygame
 
 from Modules.Matrix_8x8.Animations import *
-from Modules.PS3_Controller import *
+from Modules.PS3_Controller.ControllerConfig import *
 
 backpack_left.setBrightness(1)
 backpack_right.setBrightness(1)
