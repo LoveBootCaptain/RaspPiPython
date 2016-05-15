@@ -1,7 +1,7 @@
-import pygame
+#!/usr/bin/python
 
 from Modules.Matrix_8x8.Animations import *
-from Modules.PS3_Controller.ControllerConfig import *
+from Modules.PS3_Controller.PS3ControllerConfig import *
 
 backpack_left.setBrightness(1)
 backpack_right.setBrightness(1)
@@ -27,7 +27,7 @@ print "Pair your PS3 Controller now"
 
 try:
 
-    pygame.init()
+    pygame.joystick.init()
 
     j = pygame.joystick.Joystick(0)
     j.init()
@@ -122,7 +122,7 @@ try:
 
         # square-button (15)
 
-        elif j.get_button(button_square) != 0:
+        elif j.get_button(button_triangle) != 0:
 
             print "SQUARE"
             move(tf)
@@ -185,7 +185,7 @@ try:
 
         # STOP
 
-        elif j.get_axis(axis_left_updown) == 0.00 and j.get_axis(axis_right) == 0.00:
+        elif j.get_axis(axis_left_updown) == 0.00 and j.get_axis(axis_right_updown) == 0.00:
 
             print "CENTER"
             move(tf)
@@ -208,14 +208,14 @@ try:
 
         # left thumbstick left
 
-        elif j.get_axis(axis_left_leftright) < 0:
+        elif j.get_axis(1) < 0:
 
             print "LEFT THUMBSTICK LEFT"
             move(tf)
 
         # left thumbstick right
 
-        elif j.get_axis(axis_left_leftright) > 0:
+        elif j.get_axis(1) > 0:
 
             print "LEFT THUMBSTICK RIGHT"
             move(tf)
@@ -224,14 +224,14 @@ try:
 
         # right thumbstick up
 
-        elif j.get_axis(axis_right) < 0:
+        elif j.get_axis(axis_right_updown) < 0:
 
             print "RIGHT THUMBSTICK UP"
             move(tf)
 
         # right thumbstick down
 
-        elif j.get_axis(axis_right) > 0:
+        elif j.get_axis(axis_right_updown) > 0:
 
             print "RIGHT THUMBSTICK DOWN"
             move(tf)

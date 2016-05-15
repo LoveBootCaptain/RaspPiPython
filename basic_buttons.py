@@ -8,10 +8,10 @@ import RPi.GPIO as GPIO
 
 # it will work on any GPIO channel
 
-wifi = 22  # GPIO channel 22 for WiFi
-reboot = 27  # GPIO channel 27 for Reboot/Shutdown
-button = 23  # GPIO channel 23 for debug short/long
-script = 17  # GPIO channel 17 # for Script starts
+wifi = 22       # GPIO channel 22 for WiFi
+reboot = 27     # GPIO channel 27 for Reboot/Shutdown
+button = 23     # GPIO channel 23 for debug short/long
+script = 17     # GPIO channel 17 # for Script starts
 
 # setup the channel as input with a 50K Ohm pull up. A push button will ground the pin,
 
@@ -203,7 +203,7 @@ def button_action(button):
 
     # quit this program
 
-    print "quit this program..."
+    print "quit this program...", button
     sleep(1)
     GPIO.cleanup()
     sys.exit()

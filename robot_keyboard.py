@@ -5,12 +5,10 @@ import sys
 from time import sleep
 
 from Modules.Adafruit_Python_Code.Adafruit_MotorHAT.Adafruit_MotorHAT import Adafruit_MotorHAT
-from Modules.Adafruit_Python_Code.Adafruit_MotorHAT.Adafruit_PWM_Servo_Driver import PWM
 
 # create a default object, no changes to I2C address or frequency
 
 mh = Adafruit_MotorHAT(addr=0x60)
-sh = PWM(0x40)
 
 
 # recommended for auto-disabling motors on shutdown!

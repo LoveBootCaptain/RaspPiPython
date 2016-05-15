@@ -1,4 +1,5 @@
 #!/usr/bin/python
+
 from time import sleep
 
 from BitMaps import *
@@ -125,60 +126,72 @@ look_stoned = [
 
 
 def animation_time():
+
     sleep(0.125)
 
 
 def hold_time():
+
     sleep(1)
 
 
 def picture_left(bitmap):
+
     i = 0
 
     for byte in bitmap:
+
         left_line = int(byte, 2)
         grid_left.writeRowRaw(i, left_line)
         i += 1
 
 
 def picture_right(bitmap):
+
     i = 0
 
     for byte in bitmap:
+
         right_line = int(byte, 2)
         grid_left.writeRowRaw(i, right_line)
         i += 1
 
 
 def mood_left(scene):
+
     for look in scene:
 
         i = 0
 
         for byte in look:
+
             left_line = int(byte, 2)
             grid_left.writeRowRaw(i, left_line)
             i += 1
 
 
 def mood_right(scene):
+
     for look in scene:
 
         i = 0
 
         for byte in look:
+
             right_line = int(byte, 2)
             grid_right.writeRowRaw(i, right_line)
             i += 1
 
 
 def animation(scene):
+
     for look in scene:
 
         i = 0
         animation_time()
 
         for byte in look:
+
             line = int(byte, 2)
             print line
             grid_left.writeRowRaw(i, line)

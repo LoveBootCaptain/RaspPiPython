@@ -3,38 +3,11 @@
 import sys
 
 # import RPi.GPIO as GPIO
-import pygame
 
 from Modules.Robot.MotorConfig import *
 from Modules.Robot.ServoConfig import *
 from Modules.BrightPiLed.LEDConfig import *
-from Modules.PS3_Controller.ControllerConfig import *
-
-print "Pair your PS3 Controller now"
-
-# print "... wait 5 sec"
-
-# for x in range(0, 6):
-#     print x
-#     sleep(1)
-
-
-# Init the PS3 Controller
-
-try:
-
-    pygame.init()
-
-    j = pygame.joystick.Joystick(0)
-    j.init()
-
-    print "PS3 Controller connected"
-
-except StandardError:
-
-    print "No Controller Connected. Please pair your PS3 Controller and restart the script."
-    sleep(5)
-
+from Modules.PS3_Controller.PS3ControllerConfig import *
 
 # zero the servos on startup
 
@@ -65,8 +38,8 @@ try:
 
         # get speed data from thumbsticks Left Axis (1) Right Axis (3)
 
-        v_max_left = int((abs(j.get_axis(axis_left)) * 255))
-        v_max_right = int((abs(j.get_axis(axis_right)) * 255))
+        v_max_left = int((abs(j.get_axis(axis_left_updown)) * 255))
+        v_max_right = int((abs(j.get_axis(axis_right_updown)) * 255))
 
         # # speed for D-Pad controlling with RightTrigger (13)
         #
@@ -119,7 +92,7 @@ try:
 
         # right (5)
 
-        elif j.get_button(button_right) != 0:
+        elif j.get_button(button_rectangle) != 0:
 
             # turn_right()
 
@@ -136,8 +109,8 @@ try:
 
             if light == 0:
 
-                print "Licht AN"
-                lights_on()
+                print "LED AN"
+                lights_led()
                 light = 1
                 sleep(0.3)
 
@@ -150,7 +123,7 @@ try:
 
             else:
 
-                print "Licht AUS"
+                print "LED's AUS"
                 lights_off()
                 light = 0
                 sleep(0.3)
@@ -164,7 +137,7 @@ try:
             if servoCamTiltZero > servoCamTiltMin:
                 sh.setPWM(servoCamTilt, 0, servoCamTiltZero)
                 servoCamTiltZero -= 1
-                print "Dreieck + Cam Up", servoCamTiltZero
+                print "Viereck + Cam Up", servoCamTiltZero
 
         # X-button (14)
 
@@ -175,14 +148,14 @@ try:
                 servoCamTiltZero += 1
                 print "Kreuz + Cam Down", servoCamTiltZero
 
-        # square-button (15)
+        # triangle-button (15)
 
-        elif j.get_button(button_square) != 0:
+        elif j.get_button(button_triangle) != 0:
 
             if servoCamPanZero < servoCamPanMax:
                 sh.setPWM(servoCamPan, 0, servoCamPanZero)
                 servoCamPanZero += 1
-                print "Viereck + Cam Left", servoCamPanZero
+                print "Dreieck + Cam Left", servoCamPanZero
 
         # O-button (13)
 
@@ -249,13 +222,13 @@ try:
 
         # STOP
 
-        elif j.get_axis(axis_left) == 0.00 and j.get_axis(axis_right) == 0.00:
+        elif j.get_axis(axis_left_updown) == 0.00 and j.get_axis(axis_right_updown) == 0.00:
 
             turn_off_motors()
 
         # forward
 
-        elif j.get_axis(axis_left) < 0 and j.get_axis(axis_right) < 0:  # LThumbStickUp and RThumbStickUp
+        elif j.get_axis(axis_left_updown) < 0 and j.get_axis(axis_right_updown) < 0:  # LThumbStickUp and RThumbStickUp
 
             if v_max_left and v_max_right > 70:
 
@@ -267,7 +240,7 @@ try:
 
         # backward
 
-        elif j.get_axis(axis_left) > 0 and j.get_axis(axis_right) > 0:  # LThumbStickDown and RThumbStickDown
+        elif j.get_axis(axis_left_updown) > 0 and j.get_axis(axis_right_updown) > 0:  # LThumbStickDown and RThumbStickDown
 
             if v_max_left and v_max_right > 70:
 
@@ -279,7 +252,7 @@ try:
 
         # turn left
 
-        elif j.get_axis(axis_left) < 0 < j.get_axis(axis_right):  # LThumbStickUp and RThumbStickDown
+        elif j.get_axis(axis_left_updown) < 0 < j.get_axis(axis_right_updown):  # LThumbStickUp and RThumbStickDown
 
             if v_max_left and v_max_right > 70:
 
@@ -291,7 +264,7 @@ try:
 
         # turn right
 
-        elif j.get_axis(axis_left) > 0 > j.get_axis(axis_right):  # LThumbStickDown and RThumbStickUp
+        elif j.get_axis(axis_left_updown) > 0 > j.get_axis(axis_right_updown):  # LThumbStickDown and RThumbStickUp
 
             if v_max_left and v_max_right > 70:
 
@@ -305,7 +278,7 @@ try:
 
         # left thumbstick up
 
-        elif j.get_axis(axis_left) < 0:
+        elif j.get_axis(axis_left_updown) < 0:
 
             if v_max_left > 70:
 
@@ -317,7 +290,7 @@ try:
 
         # left thumbstick down
 
-        elif j.get_axis(axis_left) > 0:
+        elif j.get_axis(axis_left_updown) > 0:
 
             if v_max_left > 70:
 
@@ -329,14 +302,14 @@ try:
 
         # left thumbstick left
 
-        elif j.get_axis(0) < 0:
+        elif j.get_axis(axis_left_leftright) < 0:
 
             print "LTSL"
             sleep(tf)
 
         # left thumbstick right
 
-        elif j.get_axis(0) > 0:
+        elif j.get_axis(axis_left_leftright) > 0:
 
             print "LTSR"
             sleep(tf)
@@ -345,7 +318,7 @@ try:
 
         # right thumbstick up
 
-        elif j.get_axis(axis_right) < 0:
+        elif j.get_axis(axis_right_updown) < 0:
 
             if v_max_right > 70:
 
@@ -357,7 +330,7 @@ try:
 
         # right thumbstick down
 
-        elif j.get_axis(axis_right) > 0:
+        elif j.get_axis(axis_right_updown) > 0:
 
             if v_max_right > 70:
 
@@ -369,14 +342,14 @@ try:
 
         # right thumbstick left
 
-        elif j.get_axis(2) < 0:
+        elif j.get_axis(axis_right_leftright) < 0:
 
             print "RTSL"
             sleep(tf)
 
         # right thumbstick right
 
-        elif j.get_axis(2) > 0:
+        elif j.get_axis(axis_right_leftright) > 0:
 
             print "RTSR"
             sleep(tf)

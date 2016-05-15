@@ -97,7 +97,7 @@ class Adafruit_I2C(object):
             return self.errMsg()
 
     def readList(self, reg, length):
-        "Read a list of bytes from the I2C device"
+        "Read a list of bytes from the I2C keyboard_command"
         try:
             results = self.bus.read_i2c_block_data(self.address, reg, length)
             if self.debug:
@@ -109,7 +109,7 @@ class Adafruit_I2C(object):
             return self.errMsg()
 
     def readU8(self, reg):
-        "Read an unsigned byte from the I2C device"
+        "Read an unsigned byte from the I2C keyboard_command"
         try:
             result = self.bus.read_byte_data(self.address, reg)
             if self.debug:
@@ -120,7 +120,7 @@ class Adafruit_I2C(object):
             return self.errMsg()
 
     def readS8(self, reg):
-        "Reads a signed byte from the I2C device"
+        "Reads a signed byte from the I2C keyboard_command"
         try:
             result = self.bus.read_byte_data(self.address, reg)
             if result > 127: result -= 256
@@ -132,7 +132,7 @@ class Adafruit_I2C(object):
             return self.errMsg()
 
     def readU16(self, reg, little_endian=True):
-        "Reads an unsigned 16-bit value from the I2C device"
+        "Reads an unsigned 16-bit value from the I2C keyboard_command"
         try:
             result = self.bus.read_word_data(self.address, reg)
             # Swap bytes if using big endian because read_word_data assumes little
@@ -146,7 +146,7 @@ class Adafruit_I2C(object):
             return self.errMsg()
 
     def readS16(self, reg, little_endian=True):
-        "Reads a signed 16-bit value from the I2C device"
+        "Reads a signed 16-bit value from the I2C keyboard_command"
         try:
             result = self.readU16(reg, little_endian)
             if result > 32767: result -= 65536

@@ -8,7 +8,7 @@ from Adafruit_PWM_Servo_Driver import PWM
 # Example Code
 # ===========================================================================
 
-# Initialise the PWM device using the default address
+# Initialise the PWM keyboard_command using the default address
 pwm = PWM(0x40)
 # Note if you'd like more debug output you can instead run:
 # pwm = PWM(0x40, debug=True)

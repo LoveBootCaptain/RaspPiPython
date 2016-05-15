@@ -12,7 +12,7 @@ ledlight = BrightPI(1)
 # white LED'S on
 
 
-def lights_on():
+def lights_led():
     print "Turn white LED's ON"
     ledlight.reset()
     ledlight.led_all_on()

@@ -1,4 +1,5 @@
 #!/usr/bin/python
+
 import random
 
 from robot_ps3_controller import *

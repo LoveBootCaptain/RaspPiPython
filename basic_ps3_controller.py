@@ -1,40 +1,13 @@
-import pygame
+#!/usr/bin/python
 
 from time import sleep
-from Modules.PS3_Controller.ControllerConfig import *
+
+from Modules.PS3_Controller.PS3ControllerConfig import *
+
 
 # #### PLAY THE GAME #### #
 
-# better don't try this at home
-
-print "Pair your PS3 Controller now"
-
-# print "... wait 5 sec"
-
-# for x in range(0, 6):
-#     print x
-#     sleep(1)
-
-
-# Init the PS3 Controller
-
-try:
-
-    pygame.init()
-
-    j = pygame.joystick.Joystick(0)
-    j.init()
-
-    print "PS3 Controller connected"
-
-except StandardError:
-
-    print "No Controller Connected. Please pair your PS3 Controller and restart the script."
-    sleep(5)
-
-# #### SLEEP #### #
-
-# Define sleep as sleepment
+# Define timeframe
 
 tf = 0.1
 
@@ -105,9 +78,9 @@ try:
 
         # square-button (15)
 
-        elif j.get_button(button_square) != 0:
+        elif j.get_button(button_triangle) != 0:
 
-            print "SQUARE"
+            print "TRIANGLE"
             sleep(tf)
 
         # O-button (13)
@@ -163,41 +136,41 @@ try:
             print "LEFT THUMBSTICK"
             sleep(tf)
 
-        # thumbsticks direction sleepment
+            # thumbsticks direction sleepment
 
-        # STOP
+            # STOP
 
-        elif j.get_axis(axis_left) == 0.00 and j.get_axis(axis_right) == 0.00:
+        # elif AXIS_LEFT_UPDOWN == 0.00 and AXIS_RIGHT_UPDOWN == 0.00:
 
-            print "CENTER"
-            sleep(tf)
+            # print "CENTER"
+            # sleep(tf)
 
         # left thumbstick directions
 
         # left thumbstick up
 
-        elif j.get_axis(axis_left) < 0:
+        elif j.get_axis(axis_left_updown) < 0:
 
             print "LEFT THUMBSTICK UP"
             sleep(tf)
 
         # left thumbstick down
 
-        elif j.get_axis(axis_left) > 0:
+        elif j.get_axis(axis_left_updown) > 0:
 
             print "LEFT THUMBSTICK DOWN"
             sleep(tf)
 
         # left thumbstick left
 
-        elif j.get_axis(0) < 0:
+        elif j.get_axis(axis_left_leftright) < 0:
 
             print "LEFT THUMBSTICK LEFT"
             sleep(tf)
 
         # left thumbstick right
 
-        elif j.get_axis(0) > 0:
+        elif j.get_axis(axis_left_leftright) > 0:
 
             print "LEFT THUMBSTICK RIGHT"
             sleep(tf)
@@ -206,28 +179,28 @@ try:
 
         # right thumbstick up
 
-        elif j.get_axis(axis_right) < 0:
+        elif j.get_axis(axis_right_updown) < 0:
 
             print "RIGHT THUMBSTICK UP"
             sleep(tf)
 
         # right thumbstick down
 
-        elif j.get_axis(axis_right) > 0:
+        elif j.get_axis(axis_right_updown) > 0:
 
             print "RIGHT THUMBSTICK DOWN"
             sleep(tf)
 
         # right thumbstick left
 
-        elif j.get_axis(2) < 0:
+        elif j.get_axis(axis_right_leftright) < 0:
 
             print "RIGHT THUMBSTICK LEFT"
             sleep(tf)
 
         # right thumbstick right
 
-        elif j.get_axis(2) > 0:
+        elif j.get_axis(axis_right_leftright) > 0:
 
             print "RIGHT THUMBSTICK RIGHT"
             sleep(tf)

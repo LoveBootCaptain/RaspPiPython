@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 from Modules.Matrix_8x8.Animations import *
 
 backpack_left.setBrightness(1)
