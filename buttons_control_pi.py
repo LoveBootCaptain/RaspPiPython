@@ -1,20 +1,18 @@
 #!/usr/bin/python
 
 import sys
-from Modules.Buttons.ButtonConfiguration import *
+
 from Modules.Buttons.ButtonCallbackFunctions import *
+from Modules.Buttons.ButtonConfiguration import *
 
 # setup the channel as pull up. A push button will ground the pin
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(brightness, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(display, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(shutdown, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(reboot, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(escape, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(keyF4, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(wifi, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(bluetooth, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+# set up the GPIO's the smart way
+
+for button in button_configuration:
+    GPIO.setup(button['pin'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 # init everything
 
@@ -31,32 +29,28 @@ print "SYSTEM READY\n"
 
 print "You can use the following buttons:\n"
 
-print "Button #21 - scroll trough brightness settings"
-print "Button #20 - turn display on/off"
-print "Button #13 - shutdown the pi"
-print "Button #16 - reboot the pi"
-print "Button #19 - send ESC Key Command"
-print "Button #12 - send F4 Key Command"
-print "Button #05 - turn wifi on / off"
-print "Button #06 - turn bluetooth on / off\n"
+# print the button layout the smart way
 
-# use event detection for button presses and trigger a callback function from above
+for button in button_configuration:
+    print "Button #{} - {}: {} - callback: {}".format(
+        button['pin_name'],
+        button['name'],
+        button['description'],
+        button['callback']
+    )
 
-GPIO.add_event_detect(display, GPIO.FALLING, callback=set_display_state, bouncetime=500)
-GPIO.add_event_detect(brightness, GPIO.FALLING, callback=set_display_brightness, bouncetime=500)
-GPIO.add_event_detect(shutdown, GPIO.FALLING, callback=shutdown_action, bouncetime=500)
-GPIO.add_event_detect(reboot, GPIO.FALLING, callback=reboot_action, bouncetime=500)
-GPIO.add_event_detect(escape, GPIO.FALLING, callback=escape_action, bouncetime=500)
-GPIO.add_event_detect(keyF4, GPIO.FALLING, callback=key_f4_action, bouncetime=500)
-GPIO.add_event_detect(wifi, GPIO.FALLING, callback=wifi_action, bouncetime=500)
-GPIO.add_event_detect(bluetooth, GPIO.FALLING, callback=bluetooth_action, bouncetime=500)
+print '\n'
+
+# use event detection for button presses and trigger a callback function and do it smart
+
+for button in button_configuration:
+    GPIO.add_event_detect(button['pin'], GPIO.FALLING, callback=button['callback'], bouncetime=500)
 
 # assume this is the main code...
 
 try:
 
     while True:
-
         # do whatever
         # while "waiting" for falling edge on GPIO ports
 

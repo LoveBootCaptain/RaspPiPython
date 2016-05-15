@@ -1,8 +1,9 @@
 #!/usr/bin/python
 
-import RPi.GPIO as GPIO
 import os
 import time
+
+import RPi.GPIO as GPIO
 import uinput
 
 # global variables for button logic
@@ -23,7 +24,6 @@ keyboard_command = uinput.Device([
 # some init functions
 
 def init_display():
-
     global display_state
     global display_brightness_toggle
 
@@ -39,7 +39,6 @@ def init_display():
 
 
 def init_wifi():
-
     global wifi_state
 
     # disable wifi for sure
@@ -49,7 +48,6 @@ def init_wifi():
 
 
 def init_bluetooth():
-
     global bluetooth_state
 
     # disable bluetooth for sure
@@ -64,7 +62,6 @@ def init_bluetooth():
 # turn the display on / off
 
 def set_display_state(display):
-
     global display_state
 
     if not GPIO.input(display):
@@ -87,7 +84,6 @@ def set_display_state(display):
 # scroll through some brightness settings round robbin starting from medium
 
 def set_display_brightness(brightness):
-
     global display_brightness_toggle
 
     if not GPIO.input(brightness):
@@ -131,7 +127,6 @@ def set_display_brightness(brightness):
 # shutdown the pi
 
 def shutdown_action(shutdown):
-
     print "shutdown", shutdown
     os.system("sudo shutdown -P now")
 
@@ -139,7 +134,6 @@ def shutdown_action(shutdown):
 # reboot the pi
 
 def reboot_action(reboot):
-
     print "reboot", reboot
     os.system("sudo shutdown -r now")
 
@@ -147,7 +141,6 @@ def reboot_action(reboot):
 # send ESC Key command
 
 def escape_action(escape):
-
     print "ESC", escape
     keyboard_command.emit_click(uinput.KEY_ESC)
 
@@ -155,13 +148,11 @@ def escape_action(escape):
 # send F4 Key command
 
 def key_f4_action(keyF4):
-
     print "F4", keyF4
     keyboard_command.emit_click(uinput.KEY_F4)
 
 
 def wifi_action(wifi):
-
     global wifi_state
 
     if not GPIO.input(wifi):
@@ -182,7 +173,6 @@ def wifi_action(wifi):
 
 
 def bluetooth_action(bluetooth):
-
     global bluetooth_state
 
     if not GPIO.input(bluetooth):
